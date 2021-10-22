@@ -1,0 +1,21 @@
+
+# Data manipulation and analysis
+pandas>=1.0.0
+
+# HTTP requests for data collection
+requests>=2.0.0
+
+# Scientific computing
+numpy>=1.0.0
+
+# Data visualization
+matplotlib>=3.0.0
+
+# Machine learning
+scikit-learn>=0.20.0
+
+# Sentiment analysis
+vaderSentiment>=3.0.0
+
+# SMTP library for email alerts
+smtplib>=0.0.0

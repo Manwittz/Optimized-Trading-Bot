@@ -1,30 +1,27 @@
 
-# Import necessary libraries
-import pandas as pd
-
 def generate_signals(model, df, features):
     """
     Generate trading signals (buy, sell, hold) using a trained model.
+    
+    Parameters:
+    - model: Trained machine learning model
+    - df: DataFrame containing feature data
+    - features: List of feature columns in df
+    
+    Returns:
+    - List of trading signals
     """
+    # Validate input parameters
+    if not features:
+        raise ValueError("Feature list cannot be empty.")
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("Input data must be a DataFrame.")
+    
+    # Generate predictions using the model
     predictions = model.predict(df[features])
-    signals = ['Buy' if p == 1 else 'Sell' if p == -1 else 'Hold' for p in predictions]
+    
+    # Map predictions to trading signals
+    signal_mapping = {1: 'Buy', -1: 'Sell', 0: 'Hold'}
+    signals = [signal_mapping.get(p, 'Unknown') for p in predictions]
     
     return signals
-
-# Simulate signal generation
-# Create a DataFrame with some example data (In reality, you'd load your trading data here)
-df = pd.DataFrame({
-    'feature_1': [1, 2, 3, 4, 5],
-    'feature_2': [5, 4, 3, 2, 1]
-})
-
-# Mock a trained model (In reality, you'd use your actual trained model)
-class MockModel:
-    def predict(self, X):
-        return [1, -1, 1, -1, 0]
-
-model = MockModel()
-features = ['feature_1', 'feature_2']
-
-signals = generate_signals(model, df, features)
-print(f"Generated Signals: {signals}")
